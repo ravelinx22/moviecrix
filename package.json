@@ -8,6 +8,7 @@
 		"@babel/runtime": "^7.0.0-beta.36",
 		"bcrypt": "^2.0.0",
 		"bootstrap": "^4.0.0",
+		"d3": "^4.13.0",
 		"isomorphic-fetch": "^2.2.1",
 		"meteor-node-stubs": "^0.3.2",
 		"react": "^16.2.0",
