@@ -7,4 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 Meteor.startup(() => {
   render(renderRoutes(), document.getElementById('render-target'));
+
+  Meteor.call("movie.getSpecificMovie", "269149",(error, answer) => {
+    console.log(answer);
+  });
 });

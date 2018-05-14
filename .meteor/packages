@@ -26,7 +26,6 @@ service-configuration
 matb33:collection-hooks
 react-meteor-data
 accounts-password
-audit-argument-checks
 cultofcoders:mocha
 xolvio:cleaner
 dburles:factory
