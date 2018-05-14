@@ -1,1 +1,2 @@
-import "../imports/api/Movie";
+import "../imports/api/Movies";
+import "../imports/api/Reviews";
