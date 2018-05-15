@@ -7,7 +7,7 @@ import { barChart } from "../../charts/BarChart.js";
 import { lineChart } from "../../charts/LineChart.js";
 import { bubbleChart } from "../../charts/Bubble.js";
 
-export default class Home extends Component {
+export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
