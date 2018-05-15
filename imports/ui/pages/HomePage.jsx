@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import * as d3 from "d3";
-
-import { getUpc, getImg, getLine, getBar } from "../../data.js";
-import { barChart } from "../../charts/BarChart.js";
-import { lineChart } from "../../charts/LineChart.js";
-import { bubbleChart } from "../../charts/Bubble.js";
+import MovieCard from "../components/MovieCard.jsx";
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -16,16 +12,36 @@ export default class HomePage extends Component {
 	}
 
 	componentDidMount() {
-		var chart = bubbleChart().width(900).height(900).showTitleOnCircle(true).title("");
-		d3.select('#chart').datum(getUpc()).call(chart);
-
-		lineChart();
-		barChart();
 	}
 
 	render() {
+		const url = "https://www.space.ca/wp-content/uploads/2016/06/The-Martian.jpg";	
+		const style = {
+			backgroundImage: "url(" + url + ")"
+		};
+
 		return(
-			<div className="chart-example" id="chart"><svg></svg></div>
+			<div>
+			<div className="home-content" style={style}>
+				<Container className="banner-img">
+					<div className="movie_title">The Martian</div>
+					<div className="movie_genre">Drama</div>
+					<button className="see_btn">See Movie</button>
+					<div className="sub_title">Relase Date</div>
+					<div className="movie_date">1997-04-19</div>
+				</Container>		
+			</div>
+			<Container>
+				<Row>
+
+			<MovieCard/>
+			<MovieCard/>
+			<MovieCard/>
+			<MovieCard/>
+			<MovieCard/>
+				</Row>
+			</Container>
+		</div>
 		);
 	}
 }
