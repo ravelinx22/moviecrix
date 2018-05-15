@@ -70,12 +70,17 @@ a:hover {
 
 /* Movie card */
 .movie_card {
-	margin: 10px;
+	margin: 20px 0;
 	height: 400px;
 	overflow: hidden;
 	border-radius: 5px;
 	border: 1px solid #e7e7e7;
 	box-shadow: 5px 10px #e7e7e7;
+	color: black;
+}
+
+.movie_card:hover {
+	color:gray !important;
 }
 
 .movie_card.col-md-3 {
@@ -91,6 +96,16 @@ a:hover {
 .card_desc {
 	padding: 10px 25px !important;
 	font-weight: 600;
+}
+
+.card_rating {
+	margin-top: 5px;
+}
+
+.card_rating > i {
+	margin-right: 5px;
+	font-size: 10px;
+	line-height: 10px;
 }
 
 .card_title {

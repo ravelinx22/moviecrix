@@ -18,19 +18,21 @@ class MovieCard extends Component {
 
 	render() {
 		return(
-			<Link to="/detail" className="col-md-3 movie_card">
-				<img src="https://image.tmdb.org/t/p/w500/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="movie"/>
-				<Container className="card_desc">
-					<Row className="card_title">
-						TITLE
-					</Row>
-					<Row className="card_genre">
-						Genre
-					</Row>
-					<Row className="card_rating">
-						8.9
-					</Row>
-				</Container>
+			<Link to="/detail" className="col-md-3">
+				<div className="movie_card">
+					<img src="https://image.tmdb.org/t/p/w500/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="movie"/>
+					<Container className="card_desc">
+						<Row className="card_title">
+							TITLE
+						</Row>
+						<Row className="card_genre">
+							Genre
+						</Row>
+						<Row className="card_rating">
+							<i className="fa fa-heart"/> 8.9
+						</Row>
+					</Container>
+				</div>
 			</Link>
 		);			
 	}
