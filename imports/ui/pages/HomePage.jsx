@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import * as d3 from "d3";
-import MovieCard from "../components/MovieCard.jsx";
+import MoviesList from "../components/MoviesList.jsx";
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -32,14 +32,7 @@ export default class HomePage extends Component {
 				</Container>		
 			</div>
 			<Container>
-				<Row>
-
-			<MovieCard/>
-			<MovieCard/>
-			<MovieCard/>
-			<MovieCard/>
-			<MovieCard/>
-				</Row>
+				<MoviesList/>
 			</Container>
 		</div>
 		);
