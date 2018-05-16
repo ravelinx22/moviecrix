@@ -3,9 +3,9 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { Meteor } from "meteor/meteor";
 import { withRouter } from "react-router-dom";
 import { withTracker } from "meteor/react-meteor-data";
-import MoviesList from "../components/MoviesList.jsx";
+import TweetList from "../components/TweetList.jsx";
 
-class MoviesPage extends Component {
+class SoonPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,9 +18,15 @@ class MoviesPage extends Component {
 
 	render() {
 		return(
-			<Container className="theaters_title">
-				<h1>In theaters</h1>
-				<MoviesList/>
+			<Container>
+				<Row>
+					<Col md="8">
+					</Col>
+					<Col md="4">
+						<TweetList/>		
+					</Col>
+				</Row>
+
 			</Container>
 		);			
 	}
@@ -29,4 +35,4 @@ class MoviesPage extends Component {
 export default withTracker((props) => {
 	return {
 	};
-})(MoviesPage);
+})(SoonPage);

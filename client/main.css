@@ -210,3 +210,8 @@ a:hover {
 	font-size: 12px;
 	font-weight: 500px;
 }
+
+/* In theaters */
+.theaters_title {
+	margin-top: 20px;
+}
