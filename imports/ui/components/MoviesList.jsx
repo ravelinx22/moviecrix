@@ -33,7 +33,13 @@ class MoviesList extends Component {
 					movies: res
 				});
 			});
-			
+		else if (this.props.type == "coming-soon")
+			Meteor.call("movies.getUpcoming", (error, res) => {
+				this.setState({
+					movies: res
+				});
+			});
+
 		Meteor.call("movies.getGenres", (error, res) => {
 			this.setState({
 				genres: res

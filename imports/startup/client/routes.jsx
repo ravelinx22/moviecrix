@@ -9,6 +9,7 @@ import MoviePage from "../../ui/pages/MoviePage.jsx";
 import UserPage from "../../ui/pages/UserPage.jsx";
 import SoonPage from "../../ui/pages/SoonPage.jsx";
 import PopularPage from "../../ui/pages/PopularPage.jsx";
+import SignPage from "../../ui/pages/SignPage.jsx";
 import NotFoundPage from "../../ui/pages/NotFoundPage.jsx";
 
 export const renderRoutes = () => (
@@ -18,10 +19,11 @@ export const renderRoutes = () => (
 				<Route exact path="/" component={HomePage} />
 				<Route path="/popular" component={PopularPage} />
 				<Route path="/theaters" component={MoviesPage} />
-				<Route path="/soon" component={MoviesPage} />
 				<Route path="/detail/:id" component={MoviePage} />
+				<Route path="/soon" component={SoonPage} />
 				<Route path="/compare" component={ComparePage} />
 				<Route path="/user" component={UserPage} />
+				<Route path="/sign" component={SignPage} />
 				<Route path="*" component={NotFoundPage} />
 			</Switch>
 		</App>
