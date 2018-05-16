@@ -7,6 +7,8 @@ import ComparePage from "../../ui/pages/ComparePage.jsx";
 import MoviesPage from "../../ui/pages/MoviesPage.jsx";
 import MoviePage from "../../ui/pages/MoviePage.jsx";
 import UserPage from "../../ui/pages/UserPage.jsx";
+import SoonPage from "../../ui/pages/SoonPage.jsx";
+import PopularPage from "../../ui/pages/PopularPage.jsx";
 import NotFoundPage from "../../ui/pages/NotFoundPage.jsx";
 
 export const renderRoutes = () => ( 
@@ -14,9 +16,9 @@ export const renderRoutes = () => (
 		<App>
 			<Switch>
 				<Route exact path="/" component={HomePage} />
-				<Route path="/popular" component={MoviesPage} />
+				<Route path="/popular" component={PopularPage} />
 				<Route path="/theaters" component={MoviesPage} />
-				<Route path="/soon" component={MoviesPage} />
+				<Route path="/soon" component={SoonPage} />
 				<Route path="/detail" component={MoviePage} />
 				<Route path="/compare" component={ComparePage} />
 				<Route path="/user" component={UserPage} />

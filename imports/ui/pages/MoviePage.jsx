@@ -4,7 +4,7 @@ import { Meteor } from "meteor/meteor";
 import { withRouter } from "react-router-dom";
 import { withTracker } from "meteor/react-meteor-data";
 import CommentList from "../components/CommentList.jsx";
-import TweetDetail from "../components/TweetDetail.jsx";
+import TweetList from "../components/TweetList.jsx";
 
 class MoviePage extends Component {
 	constructor(props) {
@@ -40,13 +40,7 @@ class MoviePage extends Component {
 						</Col>
 					</Col>
 					<Col md="4">
-						<Row className="latest_tweets justify-content-center">
-							Latest Tweets
-						</Row>
-						<TweetDetail/>
-						<TweetDetail/>
-						<TweetDetail/>
-						<TweetDetail/>
+						<TweetList/>
 					</Col>
 				</Row>
 				<Row>
