@@ -25,7 +25,6 @@ class SoonPage extends Component {
 						<MoviesList type="coming-soon" />
 					</Col>
 					<Col md="4">
-						<TweetList />
 					</Col>
 				</Row>
 

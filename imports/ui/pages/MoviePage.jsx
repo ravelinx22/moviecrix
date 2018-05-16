@@ -10,7 +10,7 @@ class MoviePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
+			loaded: false,
 		}
 	}
 
@@ -26,7 +26,8 @@ class MoviePage extends Component {
 				description: res.overview,
 				genres: res.genres.map((g)=>{
 					return g.name + " "
-				})
+				}),
+				loaded: true,
 			});
 		});
 
@@ -62,7 +63,7 @@ class MoviePage extends Component {
 						</Col>
 					</Col>
 					<Col md="4">
-						<TweetList/>
+						<TweetList query={this.state.title} start={this.state.loaded}/>
 					</Col>
 				</Row>
 				<Row>

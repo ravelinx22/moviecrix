@@ -26,7 +26,6 @@ class PopularPage extends Component {
 						<MoviesList type="popular" />
 					</Col>
 					<Col md="4">
-						<TweetList />
 					</Col>
 				</Row>
 
