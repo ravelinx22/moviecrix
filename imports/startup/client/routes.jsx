@@ -18,13 +18,8 @@ export const renderRoutes = () => (
 				<Route exact path="/" component={HomePage} />
 				<Route path="/popular" component={PopularPage} />
 				<Route path="/theaters" component={MoviesPage} />
-<<<<<<< HEAD
 				<Route path="/soon" component={MoviesPage} />
 				<Route path="/detail/:id" component={MoviePage} />
-=======
-				<Route path="/soon" component={SoonPage} />
-				<Route path="/detail" component={MoviePage} />
->>>>>>> 79327ee1da0657c83655eb08e43a2bbe4362bc22
 				<Route path="/compare" component={ComparePage} />
 				<Route path="/user" component={UserPage} />
 				<Route path="*" component={NotFoundPage} />
