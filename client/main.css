@@ -30,6 +30,10 @@ a:hover {
 	padding-top: 200px;
 	height: 550px;
 	margin-bottom: 10px;
+	background-repeat: no-repeat; 
+	background-position: center center;
+	background-size: cover;	
+    background-attachment: fixed;
 }
 
 .banner-img {
@@ -145,6 +149,13 @@ a:hover {
 	font-size: 16px;
 	font-weight: 800;
 	line-height: 40px;
+	border-radius: 10px;
+}
+
+.tweet-scroller{
+	overflow: auto;
+	height: 400px;
+	width: 100%;
 }
 
 /* Comment component  */

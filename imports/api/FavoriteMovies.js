@@ -26,7 +26,6 @@ Meteor.methods({
                 var res = JSON.parse(movies.content);
                 return res;
             });
-            console.log(favMovies);
             return favMovies;
         }
         else
