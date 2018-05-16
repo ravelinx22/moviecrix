@@ -67,7 +67,7 @@ class MoviePage extends Component {
 				</Row>
 				<Row>
 					<Col md="8">
-						<CommentList />
+						<CommentList userId={this.props.userId}/>
 					</Col>
 				</Row>
 			</Container>
@@ -77,6 +77,7 @@ class MoviePage extends Component {
 
 export default withTracker((props) => {
 	return {
-		id: props.match.params.id
+		id: props.match.params.id,
+		userId: Meteor.userId(),
 	};
 })(MoviePage);

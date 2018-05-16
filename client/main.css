@@ -215,3 +215,22 @@ a:hover {
 .theaters_title {
 	margin-top: 20px;
 }
+
+/* Ask login */
+.ask_login {
+	text-align: center;
+	margin: 20px 0;
+}
+
+.ask_login > .row {
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+
+.ask_login > a {
+	color: white;
+	background-color: black;
+	padding: 10px;
+	box-sizing: border-box;
+	border-radius: 5px;
+}

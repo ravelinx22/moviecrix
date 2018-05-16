@@ -4,6 +4,7 @@ import { Meteor } from "meteor/meteor";
 import { withRouter } from "react-router-dom";
 import { withTracker } from "meteor/react-meteor-data";
 import CommentDetail from "./CommentDetail.jsx";
+import AskLogin from "./AskLogin.jsx";
 
 class CommentList extends Component {
 	constructor(props) {
@@ -20,8 +21,13 @@ class CommentList extends Component {
 		return(
 			<Container className="comment-content">
 				<h1>Leave a comment</h1>
-				<textarea type="text" className="comment_input"/>
-				<button className="ml-auto comment_submit">Submit</button>
+				{ this.props.userId ?
+				    <span>
+					<textarea type="text" className="comment_input"/>
+					<button className="ml-auto comment_submit">Submit</button>
+				</span>:
+					<AskLogin/>
+				}
 				<h1>Previous comments</h1>
 				<CommentDetail/>
 				<CommentDetail/>
