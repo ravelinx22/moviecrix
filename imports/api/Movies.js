@@ -26,6 +26,13 @@ Meteor.methods({
 		return res.results;
 	},
 
+	"movies.randomNowPlaying"(){
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/now_playing?api_key="+Meteor.settings.TMDBAPIKEY);
+		var res = JSON.parse(movies.content);
+		
+		return res.results[Math.floor(Math.random() * res.results.length)];
+	},
+
 	"movies.getGenres"(genre){
 		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/genre/movie/list?api_key="+Meteor.settings.TMDBAPIKEY);
 		var res = JSON.parse(movies.content);
