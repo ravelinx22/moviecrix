@@ -67,7 +67,7 @@ class MoviePage extends Component {
 				</Row>
 				<Row>
 					<Col md="8">
-						<CommentList userId={this.props.userId}/>
+						<CommentList userId={this.props.userId} movieId={this.props.id}/>
 					</Col>
 				</Row>
 			</Container>

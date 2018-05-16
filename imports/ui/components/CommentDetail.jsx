@@ -20,11 +20,11 @@ class CommentDetail extends Component {
 			<Container className="comment-detail">
 				<Row>
 					<img src="https://image.tmdb.org/t/p/w500/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="profile pic" className="img-circle comment-img" width="40" height="40"/>
-					<h3 className="comment_title">Algo</h3>
+					<h3 className="comment_title">{this.props.owner}</h3>
 				</Row>
 				<Row>
 					<div className="comment-desc">
-						asfkljasflkjasflkjalkfjalkj
+						{this.props.comment}
 					</div>
 				</Row>
 			</Container>
@@ -33,6 +33,5 @@ class CommentDetail extends Component {
 }
 
 export default withTracker((props) => {
-	return {
-	};
+	return props;
 })(CommentDetail);
