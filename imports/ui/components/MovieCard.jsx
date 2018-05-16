@@ -18,18 +18,20 @@ class MovieCard extends Component {
 
 	render() {
 		return(
-			<Link to="/detail" className="col-md-3">
+			<Link to={"/detail/"+this.props.id} className="col-md-3">
 				<div className="movie_card">
-					<img src="https://image.tmdb.org/t/p/w500/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="movie"/>
+					<img src={"http://image.tmdb.org/t/p/w500"+ this.props.poster_path} alt="movie"/>
 					<Container className="card_desc">
 						<Row className="card_title">
-							TITLE
+							{this.props.title}
 						</Row>
 						<Row className="card_genre">
-							Genre
+							{this.props.genres.map((genre)=>{
+								return genre.name + " ";
+							})}
 						</Row>
 						<Row className="card_rating">
-							<i className="fa fa-heart"/> 8.9
+							<i className="fa fa-heart"/> {this.props.vote_average}
 						</Row>
 					</Container>
 				</div>
@@ -40,5 +42,5 @@ class MovieCard extends Component {
 
 export default withTracker((props) => {
 	return {
-	};
+	};	
 })(MovieCard);

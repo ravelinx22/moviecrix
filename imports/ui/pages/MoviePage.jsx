@@ -11,32 +11,54 @@ class MoviePage extends Component {
 		super(props);
 		this.state = {
 
-		}	
+		}
 	}
 
 	componentDidMount() {
+		if (!this.props.id) return
+		Meteor.call('movies.getSpecificMovie', this.props.id, (error, res) => {
+			this.setState({
+				poster_path: res.poster_path,
+				title: res.original_title,
+				language: res.original_language,
+				rating: res.vote_average,
+				release_date: res.release_date + "",
+				description: res.overview,
+				genres: res.genres.map((g)=>{
+					return g.name + " "
+				})
+			});
+		});
+
+	}
+
+	renderGenres() {
+		if (!this.state.genres) return
+		this.state.genres.map((genre) => {
+			return genre.name + " ";
+		})
 	}
 
 	render() {
-		return(
+		return (
 			<Container className="movie-content">
 				<Row>
 					<Col md="8">
 						<Col md="5">
-							<img  className="movie_img" src="https://image.tmdb.org/t/p/w500/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="movie"/>
+							<img className="movie_img" src={this.state.poster_path?"https://image.tmdb.org/t/p/w500" + this.state.poster_path: ""} alt="movie" />
 						</Col>
 						<Col md="7">
-							<Row className="movie_name">Title</Row>
+							<Row className="movie_name">{this.state.title}</Row>
 							<Row className="sub_title_movie">Genre</Row>
-							Comedia
+							{this.state.genres}
 							<Row className="sub_title_movie">Language</Row>
-							EN
+							{this.state.language}
 							<Row className="sub_title_movie">Rating</Row>
-							8.8
+							{this.state.rating}
 							<Row className="sub_title_movie">Release Date</Row>
-							1997-208-202
+							{this.state.release_date}
 							<Row className="sub_title_movie">Descripton</Row>
-							asflksafas f asf asf asf asf asf 
+							{this.state.description}
 						</Col>
 					</Col>
 					<Col md="4">
@@ -45,15 +67,16 @@ class MoviePage extends Component {
 				</Row>
 				<Row>
 					<Col md="8">
-						<CommentList/>		
+						<CommentList />
 					</Col>
 				</Row>
 			</Container>
-		);			
+		);
 	}
 }
 
 export default withTracker((props) => {
 	return {
+		id: props.match.params.id
 	};
 })(MoviePage);

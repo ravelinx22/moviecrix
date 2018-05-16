@@ -32,7 +32,7 @@ export default class HomePage extends Component {
 				</Container>		
 			</div>
 			<Container>
-				<MoviesList/>
+				<MoviesList type="top-rated"/>
 			</Container>
 		</div>
 		);
