@@ -8,6 +8,12 @@ Meteor.methods({
             movieId: movieId,
             userId: Meteor.userId(),
         });
+    },
+    "favoriteMovies.deleteFromFavorites"(movieId) {
+        FavoriteMovies.remove({
+            movieId: movieId,
+            userId: Meteor.userId(),
+        });
     }
 });
 

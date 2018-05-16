@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { withTracker } from "meteor/react-meteor-data";
 import CommentList from "../components/CommentList.jsx";
 import TweetList from "../components/TweetList.jsx";
-import {FavoriteMovies} from "../../api/FavoriteMovies";
+import { FavoriteMovies } from "../../api/FavoriteMovies";
 
 class MoviePage extends Component {
 	constructor(props) {
@@ -25,7 +25,7 @@ class MoviePage extends Component {
 				rating: res.vote_average,
 				release_date: res.release_date + "",
 				description: res.overview,
-				genres: res.genres.map((g)=>{
+				genres: res.genres.map((g) => {
 					return g.name + " "
 				}),
 				loaded: true,
@@ -41,8 +41,12 @@ class MoviePage extends Component {
 		})
 	}
 
-	addToFavorites(){
+	addToFavorites() {
 		Meteor.call('favoriteMovies.addFavorite', this.props.id);
+	}
+
+	deleteFromFavorites() {
+		Meteor.call("favoriteMovies.deleteFromFavorites", this.props.id);
 	}
 
 	render() {
@@ -51,7 +55,7 @@ class MoviePage extends Component {
 				<Row>
 					<Col md="8">
 						<Col md="5">
-							<img className="movie_img" src={this.state.poster_path?"https://image.tmdb.org/t/p/w500" + this.state.poster_path: ""} alt="movie" />
+							<img className="movie_img" src={this.state.poster_path ? "https://image.tmdb.org/t/p/w500" + this.state.poster_path : ""} alt="movie" />
 						</Col>
 						<Col md="7">
 							<Row className="movie_name">{this.state.title}</Row>
@@ -65,16 +69,22 @@ class MoviePage extends Component {
 							{this.state.release_date}
 							<Row className="sub_title_movie">Descripton</Row>
 							{this.state.description}
-							<Row className="sub_title_movie">{!this.props.favorite?<button onClick={this.addToFavorites.bind(this)}>Add to favorites</button>:<h2>This movie is in your favorites list</h2>}</Row>
+							{
+								this.props.userId ? <Row className="sub_title_movie">
+									<button onClick={this.props.favorite ? this.deleteFromFavorites.bind(this) : this.addToFavorites.bind(this)}>
+										{this.props.favorite ? "Remove from favorites" : "Add to favorites"}
+									</button>
+								</Row>: <div></div>
+							}
 						</Col>
 					</Col>
 					<Col md="4">
-						<TweetList query={this.state.title} start={this.state.loaded}/>
+						<TweetList query={this.state.title} start={this.state.loaded} />
 					</Col>
 				</Row>
 				<Row>
 					<Col md="8">
-						<CommentList userId={this.props.userId} movieId={this.props.id}/>
+						<CommentList userId={this.props.userId} movieId={this.props.id} />
 					</Col>
 				</Row>
 			</Container>
@@ -87,6 +97,6 @@ export default withTracker((props) => {
 	return {
 		id: props.match.params.id,
 		userId: Meteor.userId(),
-		favorite: FavoriteMovies.findOne({movieId: props.match.params.id, userId: Meteor.userId()})?true : false
+		favorite: FavoriteMovies.findOne({ movieId: props.match.params.id, userId: Meteor.userId() }) ? true : false
 	};
 })(MoviePage);
