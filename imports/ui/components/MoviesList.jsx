@@ -39,6 +39,12 @@ class MoviesList extends Component {
 					movies: res
 				});
 			});
+		else if (this.props.type == "favorites")
+			Meteor.call("favoriteMovies.getFavorites", (error, res) => {
+				this.setState({
+					movies: res
+				});
+			});
 
 		Meteor.call("movies.getGenres", (error, res) => {
 			this.setState({
@@ -52,7 +58,7 @@ class MoviesList extends Component {
 
 		return this.state.movies.map((m) => {
 			var genres = this.state.genres.filter(function (genreObj) {
-				return m.genre_ids.includes(genreObj.id);
+				return (m.genre_ids?m.genre_ids:m.genres).includes(genreObj.id);
 			});
 			return <MovieCard key={m.id} title={m.title} vote_average={m.vote_average} poster_path={m.poster_path} genres={genres} id={m.id} />
 		});
