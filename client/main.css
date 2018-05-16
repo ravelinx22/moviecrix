@@ -233,4 +233,10 @@ a:hover {
 	padding: 10px;
 	box-sizing: border-box;
 	border-radius: 5px;
+} 
+
+/* Popular */
+.graph_container {
+	width: 100%;
+	height: 280px;
 }
