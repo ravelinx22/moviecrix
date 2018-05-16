@@ -19,7 +19,7 @@ class CommentDetail extends Component {
 		return(
 			<Container className="comment-detail">
 				<Row>
-					<img src="https://image.tmdb.org/t/p/w500/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="profile pic" className="img-circle comment-img" width="40" height="40"/>
+					<img src={this.props.poster_path? "https://image.tmdb.org/t/p/w500/"+this.props.poster_path: "http://www.pngmart.com/files/5/Snow-PNG-Transparent-Image.png"} alt="profile pic" className="img-circle comment-img" width="40" height="40"/>
 					<h3 className="comment_title">{this.props.owner}</h3>
 				</Row>
 				<Row>

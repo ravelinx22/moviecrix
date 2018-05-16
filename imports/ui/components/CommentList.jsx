@@ -24,7 +24,7 @@ class CommentList extends Component {
 
 	renderComments(){
 		return this.props.comments.map((c) => {
-			return	<CommentDetail key={Math.random()} comment={c.comment} owner={c.owner}/>
+			return	<CommentDetail poster_path={this.props.poster_path} key={Math.random()} comment={c.comment} owner={c.owner}/>
 		})
 	}
 

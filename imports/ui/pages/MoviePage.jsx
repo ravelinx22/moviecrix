@@ -55,7 +55,7 @@ class MoviePage extends Component {
 				<Row>
 					<Col md="8">
 						<Col md="5">
-							<img className="movie_img" src={this.state.poster_path ? "https://image.tmdb.org/t/p/w500" + this.state.poster_path : ""} alt="movie" />
+							<img className="movie_img" src={this.state.poster_path ? "https://image.tmdb.org/t/p/w500" + this.state.poster_path : "http://www.pngmart.com/files/5/Snow-PNG-Transparent-Image.png"} alt="movie" />
 						</Col>
 						<Col md="7">
 							<Row className="movie_name">{this.state.title}</Row>
@@ -84,7 +84,7 @@ class MoviePage extends Component {
 				</Row>
 				<Row>
 					<Col md="8">
-						<CommentList userId={this.props.userId} movieId={this.props.id} />
+						<CommentList userId={this.props.userId} movieId={this.props.id} poster_path={this.state.poster_path}/>
 					</Col>
 				</Row>
 			</Container>
