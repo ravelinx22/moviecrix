@@ -11,14 +11,14 @@ class TweetList extends Component {
 		super(props);
 		this.state = {
 
-		}	
+		}
 	}
 
 	componentDidMount() {
 	}
 
 	componentDidUpdate() {
-		if(this.props.start) {
+		if (this.props.start) {
 			console.log("Started stream");
 			Meteor.call("twitter.stream", this.props.query);
 		}
@@ -32,25 +32,27 @@ class TweetList extends Component {
 	renderTweets() {
 		return this.props.tweets.map((t) => {
 			console.log(t);
-			return <TweetDetail tweet={t}  key={t._id}/>
+			return <TweetDetail tweet={t} key={t._id} />
 		});
 	}
 
 	render() {
-		return(
+		return (
 			<div>
 				<Row className="latest_tweets justify-content-center">
 					Latest Tweets
 				</Row>
-				{this.renderTweets()}
+				<div className="tweet-scroller">
+					{this.renderTweets()}
+				</div>
 			</div>
-		);			
+		);
 	}
 }
 
 export default withTracker((props) => {
 	Meteor.subscribe("tweets");
 	return {
-		tweets: Tweets.find({query: props.query},{limit: 4}).fetch(),
+		tweets: Tweets.find({ query: props.query }).fetch(),
 	};
 })(TweetList);

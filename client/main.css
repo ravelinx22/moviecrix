@@ -149,6 +149,13 @@ a:hover {
 	font-size: 16px;
 	font-weight: 800;
 	line-height: 40px;
+	border-radius: 10px;
+}
+
+.tweet-scroller{
+	overflow: auto;
+	height: 400px;
+	width: 100%;
 }
 
 /* Comment component  */
