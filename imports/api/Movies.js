@@ -3,7 +3,7 @@ import { HTTP } from "meteor/http";
 
 Meteor.methods({
     "movies.getPopular"(){
-		var movies = HTTP.call("GET", "h	ttps://api.themoviedb.org/3/movie/popular?api_key="+Meteor.settings.TMDBAPIKEY);
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/popular?api_key="+Meteor.settings.TMDBAPIKEY);
 		var res = JSON.parse(movies.content);
 		return res.results;
 	},

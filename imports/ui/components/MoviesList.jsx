@@ -21,6 +21,25 @@ class MoviesList extends Component {
 					movies: res
 				});
 			});
+		else if (this.props.type == "popular")
+			Meteor.call("movies.getPopular", (error, res) => {
+				this.setState({
+					movies: res
+				});
+			});
+		else if (this.props.type == "in-theaters")
+			Meteor.call("movies.nowPlaying", (error, res) => {
+				this.setState({
+					movies: res
+				});
+			});
+		else if (this.props.type == "coming-soon")
+			Meteor.call("movies.getUpcoming", (error, res) => {
+				this.setState({
+					movies: res
+				});
+			});
+
 		Meteor.call("movies.getGenres", (error, res) => {
 			this.setState({
 				genres: res
@@ -35,7 +54,7 @@ class MoviesList extends Component {
 			var genres = this.state.genres.filter(function (genreObj) {
 				return m.genre_ids.includes(genreObj.id);
 			});
-			return <MovieCard key={m.id} title={m.title} vote_average={m.vote_average} poster_path={m.poster_path} genres={genres} id={m.id}/>
+			return <MovieCard key={m.id} title={m.title} vote_average={m.vote_average} poster_path={m.poster_path} genres={genres} id={m.id} />
 		});
 	}
 

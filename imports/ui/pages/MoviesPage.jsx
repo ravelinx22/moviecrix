@@ -20,7 +20,7 @@ class MoviesPage extends Component {
 		return(
 			<Container className="theaters_title">
 				<h1>In theaters</h1>
-				<MoviesList/>
+				<MoviesList type="in-theaters" />
 			</Container>
 		);			
 	}

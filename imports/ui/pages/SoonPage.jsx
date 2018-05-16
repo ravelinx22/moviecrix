@@ -4,31 +4,33 @@ import { Meteor } from "meteor/meteor";
 import { withRouter } from "react-router-dom";
 import { withTracker } from "meteor/react-meteor-data";
 import TweetList from "../components/TweetList.jsx";
+import MoviesList from "../components/MoviesList.jsx";
 
 class SoonPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 
-		}	
+		}
 	}
 
 	componentDidMount() {
 	}
 
 	render() {
-		return(
+		return (
 			<Container>
 				<Row>
 					<Col md="8">
+						<MoviesList type="coming-soon" />
 					</Col>
 					<Col md="4">
-						<TweetList/>		
+						<TweetList />
 					</Col>
 				</Row>
 
 			</Container>
-		);			
+		);
 	}
 }
 
