@@ -2,26 +2,26 @@ import { Meteor } from "meteor/meteor";
 import { HTTP } from "meteor/http";
 
 Meteor.methods({
-    "movies.getPopular"(){
-		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/popular?api_key="+Meteor.settings.TMDBAPIKEY);
+    "movies.getPopular"(page){
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/popular?api_key="+Meteor.settings.TMDBAPIKEY+"&page="+page);
 		var res = JSON.parse(movies.content);
 		return res.results;
 	},
 
-	"movies.getTopRated"(){
-		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/top_rated?api_key="+Meteor.settings.TMDBAPIKEY);
+	"movies.getTopRated"(page){
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/top_rated?api_key="+Meteor.settings.TMDBAPIKEY+"&page="+page);
 		var res = JSON.parse(movies.content);
 		return res.results;
 	},
 
-	"movies.getUpcoming"(){
-		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/upcoming?api_key="+Meteor.settings.TMDBAPIKEY);
+	"movies.getUpcoming"(page){
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/upcoming?api_key="+Meteor.settings.TMDBAPIKEY+"&page="+page);
 		var res = JSON.parse(movies.content);
 		return res.results;
 	},
 
-	"movies.nowPlaying"(){
-		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/now_playing?api_key="+Meteor.settings.TMDBAPIKEY);
+	"movies.nowPlaying"(page){
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/now_playing?api_key="+Meteor.settings.TMDBAPIKEY+"&page="+page);
 		var res = JSON.parse(movies.content);
 		return res.results;
 	},
@@ -39,14 +39,14 @@ Meteor.methods({
 		return res.genres;
 	},
 
-	"movies.getByGenre"(genre){
-		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/discover/movie?with_genres="+genre+"&api_key="+Meteor.settings.TMDBAPIKEY);
+	"movies.getByGenre"(genre, page){
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/discover/movie?with_genres="+genre+"&api_key="+Meteor.settings.TMDBAPIKEY+"&page="+page);
 		var res = JSON.parse(movies.content);
 		return res.results;
 	},
 
-	"movies.getByName"(name){
-		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/search/movie?api_key="+Meteor.settings.TMDBAPIKEY+"&query="+name);
+	"movies.getByName"(name, page){
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/search/movie?api_key="+Meteor.settings.TMDBAPIKEY+"&query="+name+"&page="+page);
 		var res = JSON.parse(movies.content);
 		return res.results;
 	},
@@ -57,8 +57,8 @@ Meteor.methods({
 		return res;
 	},
 
-	"movies.recommendedByMovie"(movieId){
-		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/"+movieId+"/recommendations?api_key="+Meteor.settings.TMDBAPIKEY);
+	"movies.recommendedByMovie"(movieId, page){
+		var movies = HTTP.call("GET", "https://api.themoviedb.org/3/movie/"+movieId+"/recommendations?api_key="+Meteor.settings.TMDBAPIKEY+"&page="+page);
 		var res = JSON.parse(movies.content);
 		return res.results;
 	},
