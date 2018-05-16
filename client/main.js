@@ -9,4 +9,6 @@ import { HTTP } from "meteor/http";
 
 Meteor.startup(() => {
   render(renderRoutes(), document.getElementById('render-target'));
+  Meteor.subscribe('favoriteMovies');
+  Meteor.call('favoriteMovies.addFavorite', "299536");
 });
