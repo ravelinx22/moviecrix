@@ -27,6 +27,7 @@ export default class App extends Component {
 						<Link to="/popular" className="py-2 d-none d-md-inline-block" href="#">Popular</Link>
 						<Link to="theaters" className="py-2 d-none d-md-inline-block" href="#">In Theaters</Link>
 						<Link to="soon" className="py-2 d-none d-md-inline-block" href="#">Coming Soon</Link>
+						<Link to="sign" className="py-2 d-none d-md-inline-block" href="#">Log In</Link>
 					</Container>
 				</nav>
 				{this.props.children}
