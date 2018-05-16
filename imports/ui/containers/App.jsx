@@ -28,8 +28,8 @@ class App extends Component {
 						<Link to="/theaters" className="py-2 d-none d-md-inline-block" href="#">In Theaters</Link>
 						<Link to="/soon" className="py-2 d-none d-md-inline-block" href="#">Coming Soon</Link>
 						{ !this.props.userId ?  
-								<Link to="/sign" className="py-2 d-none d-md-inline-block" href="#">Log Out</Link> :
-								<Link to="/" className="py-2 d-none d-md-inline-block">Buenas</Link>
+								<Link to="/sign" className="py-2 d-none d-md-inline-block" href="#">Log In</Link> :
+								<Link to="/" className="py-2 d-none d-md-inline-block">Log Out</Link>
 						}
 					</Container>
 				</nav>
