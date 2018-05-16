@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { withTracker } from "meteor/react-meteor-data";
 import CommentList from "../components/CommentList.jsx";
 import TweetList from "../components/TweetList.jsx";
+import {FavoriteMovies} from "../../api/FavoriteMovies";
 
 class MoviePage extends Component {
 	constructor(props) {
@@ -40,6 +41,10 @@ class MoviePage extends Component {
 		})
 	}
 
+	addToFavorites(){
+		Meteor.call('favoriteMovies.addFavorite', this.props.id);
+	}
+
 	render() {
 		return (
 			<Container className="movie-content">
@@ -60,6 +65,7 @@ class MoviePage extends Component {
 							{this.state.release_date}
 							<Row className="sub_title_movie">Descripton</Row>
 							{this.state.description}
+							<Row className="sub_title_movie">{!this.props.favorite?<button onClick={this.addToFavorites.bind(this)}>Add to favorites</button>:<h2>This movie is in your favorites list</h2>}</Row>
 						</Col>
 					</Col>
 					<Col md="4">
@@ -77,8 +83,10 @@ class MoviePage extends Component {
 }
 
 export default withTracker((props) => {
+	Meteor.subscribe('favoriteMovies');
 	return {
 		id: props.match.params.id,
 		userId: Meteor.userId(),
+		favorite: FavoriteMovies.findOne({movieId: props.match.params.id, userId: Meteor.userId()})?true : false
 	};
 })(MoviePage);
