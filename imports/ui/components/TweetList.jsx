@@ -31,7 +31,6 @@ class TweetList extends Component {
 
 	renderTweets() {
 		return this.props.tweets.map((t) => {
-			console.log(t);
 			return <TweetDetail tweet={t} key={t._id} />
 		});
 	}

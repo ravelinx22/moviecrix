@@ -259,3 +259,9 @@ a:hover {
 .loading{
 	margin: 25px;
 }
+
+.line {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 2px;
+  }
