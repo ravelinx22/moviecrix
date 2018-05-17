@@ -45,7 +45,7 @@ class SoonPage extends Component {
 			})
 			.click(function (d, i, datum) {
 				const id = d.movie_id;
-				that.props.history.push("/detail/" + id);
+				that.props.history.push("/detail/" + id+"/"+d.title);
 			})
 
 		var svg = d3.select("#timeline1")

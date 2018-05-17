@@ -54,9 +54,9 @@ export default class HomePage extends Component {
 								return genre.name + " ";
 							})}
 						</div>
-						<Link to={"/detail/" + this.state.movieId}>
+						<Link to={"/detail/" + this.state.movieId+"/"+this.state.movieTitle}>
 							<button className="see_btn">See Movie</button>
-						</Link>
+						</Link> 
 						<div className="sub_title">Release Date</div>
 						<div className="movie_date">{this.state.release_date}</div>
 					</Container>
