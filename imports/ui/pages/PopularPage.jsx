@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
-import { Meteor } from "meteor/meteor";import { withRouter } from "react-router-dom";
+import { Meteor } from "meteor/meteor"; import { withRouter } from "react-router-dom";
 import { withTracker } from "meteor/react-meteor-data";
 import TweetList from "../components/TweetList.jsx";
 import MoviesList from "../components/MoviesList.jsx";
@@ -17,52 +17,39 @@ class PopularPage extends Component {
 	}
 
 	componentDidMount() {
-		var myChart = barChart()
-		myChart.chartTitle("Popularity")
+		Meteor.call("movies.getPopular", 1, (error, res) => {
+			var myChart = barChart("popularity")
+			myChart.chartTitle("Popularity")
 				.chartType("popularity");
 
-		var rankedAlbums = [
-			{
-				popularity: 25.526805,
-				vote_average: 8.3,
-				poster_path:  "adw6Lq9FiC9zjYEpOqfq03ituwp",
-				title: "Fight Club"
-			},
-			{
-				popularity: 25.526805,
-				vote_average: 8.3,
-				poster_path:  "adw6Lq9FiC9zjYEpOqfq03ituwp",
-				title: "Fight Club"
-			},
-			{
-				popularity: 25.526805,
-				vote_average: 8.3,
-				poster_path:  "adw6Lq9FiC9zjYEpOqfq03ituwp",
-				title: "Fight Club"
-			}
-		];
-		d3.select('#chart')
-			.datum(rankedAlbums)
-			.call(myChart);
+			var rankedAlbums = res.slice(0, 12);
+			d3.select('#chart')
+				.datum(rankedAlbums)
+				.call(myChart);
+		});
 	}
 
 	render() {
 		return (
 			<Container>
 				<Row className="graph_container bar_chart">
-					<svg id="chart" className="movieChart">
-						<defs>
-							<linearGradient id="coolGradient" x1="0" x2="100%" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-								<stop stopColor="#3DAFD5" offset="0%"/>
-								<stop stopColor="#8AF2B3" offset="100%"/>
-							</linearGradient>
-						</defs>
-					</svg>
+					<Col md={8}>
+						<Row>
+							<h1>Most popular</h1>
+							<MoviesList type="popular" />
+						</Row>
+					</Col>
+					<Col md={4}>
+						<svg id="chart" className="movieChart" className="graph">
+							<defs>
+								<linearGradient id="coolGradient" x1="0" x2="100%" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+									<stop stopColor="#3DAFD5" offset="0%" />
+									<stop stopColor="#8AF2B3" offset="100%" />
+								</linearGradient>
+							</defs>
+						</svg>
+					</Col>
 				</Row>
-				<Row>
-					<MoviesList type="popular" />
-				</Row>
-
 			</Container>
 
 		);
