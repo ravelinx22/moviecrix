@@ -33,7 +33,7 @@ class App extends Component {
 						<Link to="/popular" className="py-2 d-none d-md-inline-block" href="#">Popular</Link>
 						<Link to="/theaters" className="py-2 d-none d-md-inline-block" href="#">In Theaters</Link>
 						<Link to="/soon" className="py-2 d-none d-md-inline-block" href="#">Coming Soon</Link>
-						{this.props.userId ? <Link to="/favorites" className="py-2 d-none d-md-inline-block" href="#">Favorite</Link> : null}
+						{this.props.userId ? <Link to="/favorites" className="py-2 d-none d-md-inline-block" href="#">Favorites</Link> : null}
 						{!this.props.userId ?
 							<Link to="/sign" className="py-2 d-none d-md-inline-block" href="#">Log In</Link> :
 							<a className="py-2 d-none d-md-inline-block" onClick={this.logout.bind(this)} href="#">Log Out</a>

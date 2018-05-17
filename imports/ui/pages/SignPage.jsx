@@ -87,7 +87,7 @@ class SignPage extends Component {
 	render() {
 		return(
 			<Row className="enter_form justify-content-center">
-				<div className="enter_form_title">CoderHunt</div>
+				<div className="enter_form_title">MovieCrix</div>
 				{this.renderForm()}
 			</Row>
 		);
