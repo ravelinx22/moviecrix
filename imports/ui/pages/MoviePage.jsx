@@ -9,11 +9,54 @@ import { FavoriteMovies } from "../../api/FavoriteMovies";
 import * as d3 from "d3";
 import { Tweets } from "../../api/Tweets.js";
 
+const actualDate = new Date();
+
+
+function calculateData(tweets) {
+	var datesData = {};
+	for (let index = 0; index < tweets.length; index++) {
+		var month = (new Date(tweets[index].created_at)).getMonth(); //months from 1-12
+		var day = (new Date(tweets[index].created_at)).getDate();
+		var year = (new Date(tweets[index].created_at)).getFullYear();
+		var hour = (new Date(tweets[index].created_at)).getHours();
+		var minutes = (new Date(tweets[index].created_at)).getMinutes();
+		var weekDay = (new Date()).getDay();
+
+		var newDate = new Date(year, month, 0, hour, minutes, 0, 0);
+
+		if (!datesData[newDate])
+			datesData[newDate] = 0;
+		console.log(actualDate.getHours());
+		console.log(actualDate .getHours()+ "-" + (hour));
+		console.log(actualDate.getHours() === (hour))
+		console.log(actualDate.getMinutes() <= newDate.getMinutes())
+
+		if (actualDate.getHours() == hour)
+			if (actualDate.getMinutes() <= newDate.getMinutes())
+				datesData[newDate] = ++datesData[newDate];
+	}
+
+	var finalData = [];
+
+	for (var property in datesData) {
+		if (datesData.hasOwnProperty(property)) {
+			finalData = finalData.concat({ date: new Date(property + ""), close: datesData[property] })
+		}
+	}
+	finalData.sort(function (a, b) {
+		// Turn your strings into dates, and then subtract them
+		// to get a value that is either negative, positive, or zero.
+		return b.date - a.date;
+	});
+
+	return finalData;
+}
+
 
 // set the dimensions and margins of the graph
 var margin = { top: 20, right: 20, bottom: 30, left: 50 },
-	width = 960 - margin.left - margin.right,
-	height = 500 - margin.top - margin.bottom;
+	width = 400 - margin.left - margin.right,
+	height = 250 - margin.top - margin.bottom;
 var svg
 var parseTime
 var x
@@ -42,7 +85,7 @@ class MoviePage extends Component {
 			// 		date: "24-Apr-12", close: "130.28"
 			// 	}]
 		}
-		this.calculateData.bind(this);
+		//this.calculateData.bind(this);
 
 		console.log(this.props.id);
 		Meteor.call('movies.getSpecificMovie', this.props.id, (error, res) => {
@@ -58,9 +101,6 @@ class MoviePage extends Component {
 				}),
 				loaded: true,
 			});
-
-			this.calculateData();
-			this.forceUpdate();
 		});
 	}
 
@@ -87,67 +127,80 @@ class MoviePage extends Component {
 			.attr("transform",
 				"translate(" + margin.left + "," + margin.top + ")");
 
+		svg.append("g")
+			.attr("class", "x-axis")
+
+		svg.append("g")
+			.attr("class", "y-axis")
+
 	}
 
-	calculateData() {
-		var tweets = Tweets.find({ query: this.state.title }, { created_at: 1, _id: 0 }).fetch();
-		var datesData = {};
-		for (let index = 0; index < tweets.length; index++) {
-			var month = (new Date(tweets[index].created_at)).getUTCMonth() + 1; //months from 1-12
-			var day = (new Date(tweets[index].created_at)).getUTCDate();
-			var year = (new Date(tweets[index].created_at)).getUTCFullYear();
+	// calculateData() {
+	// 	var tweets = Tweets.find({ query: this.state.title }, { created_at: 1, _id: 0 }).fetch();
+	// 	var datesData = {};
+	// 	for (let index = 0; index < tweets.length; index++) {
+	// 		var month = (new Date(tweets[index].created_at)).getUTCMonth() + 1; //months from 1-12
+	// 		var day = (new Date(tweets[index].created_at)).getUTCDate();
+	// 		var year = (new Date(tweets[index].created_at)).getUTCFullYear();
 
-			var newDate = year + "/" + month + "/" + day;
-			if (!datesData[newDate])
-				datesData[newDate] = 0;
-			datesData[newDate] = ++datesData[newDate];
-		}
+	// 		var newDate = year + "/" + month + "/" + day;
+	// 		if (!datesData[newDate])
+	// 			datesData[newDate] = 0;
+	// 		datesData[newDate] = ++datesData[newDate];
+	// 	}
 
-		var finalData = [];
+	// 	var finalData = [];
 
-		for (var property in datesData) {
-			if (datesData.hasOwnProperty(property)) {
-				finalData = finalData.concat({ date: new Date(property + ""), close: datesData[property] })
-			}
-		}
-		finalData.sort(function (a, b) {
-			// Turn your strings into dates, and then subtract them
-			// to get a value that is either negative, positive, or zero.
-			return b.date - a.date;
-		});
+	// 	for (var property in datesData) {
+	// 		if (datesData.hasOwnProperty(property)) {
+	// 			finalData = finalData.concat({ date: new Date(property + ""), close: datesData[property] })
+	// 		}
+	// 	}
+	// 	finalData.sort(function (a, b) {
+	// 		// Turn your strings into dates, and then subtract them
+	// 		// to get a value that is either negative, positive, or zero.
+	// 		return b.date - a.date;
+	// 	});
 
-		this.setState({
-			data: finalData,
-		})
-		console.log(this.state.data);
-	}
+	// 	this.setState({
+	// 		data: finalData,
+	// 	})
+	// 	console.log(this.state.data);
+	//}
 
-	componentWillUpdate() {
-		console.log(this.state.data);
+	componentWillUpdate(props) {
+		console.log(this.props.data);
 		console.log("Updatiando");
-		if (!this.state.data) return
-		this.state.data.forEach(function (d) {
+		if (!this.props.data) return
+		this.props.data.forEach(function (d) {
 			d.date = d.date;
 			d.close = +d.close;
 		});
 
 		// Scale the range of the data
-		x.domain(d3.extent(this.state.data, function (d) { return d.date; }));
-		y.domain([0, d3.max(this.state.data, function (d) { return d.close; })]);
+		x.domain(d3.extent(this.props.data, function (d) { return d.date; }));
+		y.domain([0, d3.max(this.props.data, function (d) { return d.close; })]);
 
 		// Add the valueline path.
-		svg.append("path")
-			.data([this.state.data])
+		var binder = svg.selectAll(".line")
+			.data([this.props.data]);
+
+		binder.exit()
+			.remove();
+
+		binder.enter()
+			.append("path")
+			.merge(binder)
 			.attr("class", "line")
 			.attr("d", valueline);
 
 		// Add the X Axis
-		svg.append("g")
+		svg.select(".x-axis")
 			.attr("transform", "translate(0," + height + ")")
 			.call(d3.axisBottom(x));
 
 		// Add the Y Axis
-		svg.append("g")
+		svg.select(".y-axis")
 			.call(d3.axisLeft(y));
 	}
 
@@ -169,7 +222,6 @@ class MoviePage extends Component {
 	render() {
 		return (
 			<Container className="movie-content">
-				<div id="line-graph"></div>
 				<Row>
 					<Col md="8">
 						<Col md="5">
@@ -204,6 +256,9 @@ class MoviePage extends Component {
 					<Col md="8">
 						<CommentList userId={this.props.userId} movieId={this.props.id} poster_path={this.state.poster_path} />
 					</Col>
+					<Col md={4}>
+						<div id="line-graph"></div>
+					</Col>
 				</Row>
 			</Container>
 		);
@@ -214,9 +269,15 @@ export default withTracker((props) => {
 	Meteor.subscribe('favoriteMovies');
 	Meteor.subscribe('tweets');
 
+	var tweets = Tweets.find({ query: props.match.params.name }, { created_at: 1, _id: 0 }).fetch();
+	var data = calculateData(tweets);
+	console.log(props.match.params.name);
+	console.log(data);
+
 	return {
 		id: props.match.params.id,
 		userId: Meteor.userId(),
 		favorite: FavoriteMovies.findOne({ movieId: props.match.params.id, userId: Meteor.userId() }) ? true : false,
+		data: data
 	};
 })(MoviePage);

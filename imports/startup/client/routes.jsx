@@ -20,7 +20,7 @@ export const renderRoutes = () => (
 				<Route exact path="/" component={HomePage} />
 				<Route path="/popular" component={PopularPage} />
 				<Route path="/theaters" component={MoviesPage} />
-				<Route path="/detail/:id" component={MoviePage} />
+				<Route path="/detail/:id/:name" component={MoviePage} />
 				<Route path="/soon" component={SoonPage} />
 				<Route path="/compare" component={ComparePage} />
 				<Route path="/favorites" component={FavoritesPage} />

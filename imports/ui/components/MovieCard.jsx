@@ -18,7 +18,7 @@ class MovieCard extends Component {
 
 	render() {
 		return(
-			<Link to={"/detail/"+this.props.id} className="col-md-3">
+			<Link to={"/detail/"+this.props.id+"/"+this.props.title} className="col-md-3">
 				<div className="movie_card">
 					<img src={"http://image.tmdb.org/t/p/w500"+ this.props.poster_path} alt="movie"/>
 					<Container className="card_desc">
