@@ -28,7 +28,6 @@ class MoviesPage extends Component {
 				.call(myChart);
 		});
 	}
-
 	render() {
 		return (
 			<Container className="theaters_title">
