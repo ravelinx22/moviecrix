@@ -24,16 +24,17 @@ function calculateData(tweets) {
 
 		var newDate = new Date(year, month, 0, hour, minutes, 0, 0);
 
-		if (!datesData[newDate])
-			datesData[newDate] = 0;
-		console.log(actualDate.getHours());
-		console.log(actualDate .getHours()+ "-" + (hour));
-		console.log(actualDate.getHours() === (hour))
-		console.log(actualDate.getMinutes() <= newDate.getMinutes())
+		console.log(actualDate.getHours() == hour);
+		console.log(actualDate.getHours() + "-" + hour);
 
 		if (actualDate.getHours() == hour)
-			if (actualDate.getMinutes() <= newDate.getMinutes())
+			if (actualDate.getMinutes() <= newDate.getMinutes()) {
+				if (!datesData[newDate])
+					datesData[newDate] = 0;
 				datesData[newDate] = ++datesData[newDate];
+			}
+
+		console.log(datesData);
 	}
 
 	var finalData = [];
@@ -257,6 +258,7 @@ class MoviePage extends Component {
 						<CommentList userId={this.props.userId} movieId={this.props.id} poster_path={this.state.poster_path} />
 					</Col>
 					<Col md={4}>
+						<h1>Actividad reciente de tweets</h1>
 						<div id="line-graph"></div>
 					</Col>
 				</Row>
