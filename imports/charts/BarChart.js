@@ -1,13 +1,13 @@
 import * as d3 from "d3";
 
-export function barChart(){
-	var width = 1000,
+export function barChart(type_graph){
+	var width = 550,
 		barHeight = 25,
 		numBars = 10,
 		barMargin = 35,
 		thumbWidth = 25,
 		title = "Chart",
-		type = "popularity",
+		type = type_graph,
 		chartMargin = {
 			top: 20,
 			left: 20,
@@ -63,7 +63,7 @@ export function barChart(){
 				.attr('height', thumbWidth)
 				.attr('y', barMargin/4)
 				.attr('xlink:href', function(d){
-					const image = "http://image.tmdb.org/t/p/w500/" + d.poster_path + ".jpg";
+					const image = "http://image.tmdb.org/t/p/w500/" + d.poster_path;
 					console.log(image);
 					return image; 
 				});

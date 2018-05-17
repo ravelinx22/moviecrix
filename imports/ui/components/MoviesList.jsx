@@ -7,6 +7,7 @@ import MovieCard from "./MovieCard.jsx";
 import { Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+
 class MoviesList extends Component {
 	constructor(props) {
 		super(props);
@@ -103,7 +104,7 @@ class MoviesList extends Component {
 					dataLength={this.state.movies ? this.state.movies.length : 0}
 					next={this.fetchMoreData.bind(this)}
 					hasMore={true}
-					loader={<h4>Loading...</h4>}
+					loader={<h4 className = "loading">Loading...</h4>}
 				>
 					{this.renderMovies()}
 				</InfiniteScroll>
