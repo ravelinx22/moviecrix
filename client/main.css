@@ -144,7 +144,7 @@ a:hover {
 }
 
 .latest_tweets {
-	background-color: #35aadc;
+	background-color: #1777a0;
 	color: white;
 	text-align: center;
 	height: 40px;
@@ -215,7 +215,7 @@ a:hover {
 }
 
 .tweet_date {
-	color: lightgray;
+	color: rgb(113, 113, 113);
 	font-size: 12px;
 }
 
