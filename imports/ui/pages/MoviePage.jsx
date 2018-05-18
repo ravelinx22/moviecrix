@@ -11,7 +11,6 @@ import { Tweets } from "../../api/Tweets.js";
 
 const actualDate = new Date();
 
-
 function calculateData(tweets) {
 	var datesData = {};
 	for (let index = 0; index < tweets.length; index++) {
@@ -24,8 +23,6 @@ function calculateData(tweets) {
 
 		var newDate = new Date(year, month, 0, hour, minutes, 0, 0);
 
-		console.log(actualDate.getHours() == hour);
-		console.log(actualDate.getHours() + "-" + hour);
 
 		if (actualDate.getHours() == hour)
 			if (actualDate.getMinutes() <= newDate.getMinutes()) {
@@ -33,8 +30,6 @@ function calculateData(tweets) {
 					datesData[newDate] = 0;
 				datesData[newDate] = ++datesData[newDate];
 			}
-
-		console.log(datesData);
 	}
 
 	var finalData = [];
@@ -45,16 +40,12 @@ function calculateData(tweets) {
 		}
 	}
 	finalData.sort(function (a, b) {
-		// Turn your strings into dates, and then subtract them
-		// to get a value that is either negative, positive, or zero.
 		return b.date - a.date;
 	});
 
 	return finalData;
 }
 
-
-// set the dimensions and margins of the graph
 var margin = { top: 20, right: 20, bottom: 30, left: 50 },
 	width = 400 - margin.left - margin.right,
 	height = 250 - margin.top - margin.bottom;
@@ -69,26 +60,8 @@ class MoviePage extends Component {
 		super(props);
 		this.state = {
 			loaded: false,
-			// data: [
-			// 	{
-			// 		date: "1-May-12", close: "58.13"
-			// 	},
-			// 	{
-			// 		date: "30-Apr-12", close: "53.98"
-			// 	},
-			// 	{
-			// 		date: "27-Apr-12", close: "67.00"
-			// 	},
-			// 	{
-			// 		date: "25-Apr-12", close: "99.00"
-			// 	},
-			// 	{
-			// 		date: "24-Apr-12", close: "130.28"
-			// 	}]
 		}
-		//this.calculateData.bind(this);
 
-		console.log(this.props.id);
 		Meteor.call('movies.getSpecificMovie', this.props.id, (error, res) => {
 			this.setState({
 				poster_path: res.poster_path,
@@ -106,21 +79,13 @@ class MoviePage extends Component {
 	}
 
 	componentDidMount() {
-		// parse the date / time
 		parseTime = d3.timeParse("%d-%b-%y");
-
-		// set the ranges
 		x = d3.scaleTime().range([0, width]);
 		y = d3.scaleLinear().range([height, 0]);
-
-		// define the line
 		valueline = d3.line()
 			.x(function (d) { return x(d.date); })
 			.y(function (d) { return y(d.close); });
 
-		// append the svg obgect to the body of the page
-		// appends a 'group' element to 'svg'
-		// moves the 'group' element to the top left margin
 		svg = d3.select("#line-graph").append("svg")
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", height + margin.top + margin.bottom)
@@ -136,53 +101,16 @@ class MoviePage extends Component {
 
 	}
 
-	// calculateData() {
-	// 	var tweets = Tweets.find({ query: this.state.title }, { created_at: 1, _id: 0 }).fetch();
-	// 	var datesData = {};
-	// 	for (let index = 0; index < tweets.length; index++) {
-	// 		var month = (new Date(tweets[index].created_at)).getUTCMonth() + 1; //months from 1-12
-	// 		var day = (new Date(tweets[index].created_at)).getUTCDate();
-	// 		var year = (new Date(tweets[index].created_at)).getUTCFullYear();
-
-	// 		var newDate = year + "/" + month + "/" + day;
-	// 		if (!datesData[newDate])
-	// 			datesData[newDate] = 0;
-	// 		datesData[newDate] = ++datesData[newDate];
-	// 	}
-
-	// 	var finalData = [];
-
-	// 	for (var property in datesData) {
-	// 		if (datesData.hasOwnProperty(property)) {
-	// 			finalData = finalData.concat({ date: new Date(property + ""), close: datesData[property] })
-	// 		}
-	// 	}
-	// 	finalData.sort(function (a, b) {
-	// 		// Turn your strings into dates, and then subtract them
-	// 		// to get a value that is either negative, positive, or zero.
-	// 		return b.date - a.date;
-	// 	});
-
-	// 	this.setState({
-	// 		data: finalData,
-	// 	})
-	// 	console.log(this.state.data);
-	//}
-
 	componentWillUpdate(props) {
-		console.log(this.props.data);
-		console.log("Updatiando");
 		if (!this.props.data) return
 		this.props.data.forEach(function (d) {
 			d.date = d.date;
 			d.close = +d.close;
 		});
 
-		// Scale the range of the data
 		x.domain(d3.extent(this.props.data, function (d) { return d.date; }));
 		y.domain([0, d3.max(this.props.data, function (d) { return d.close; })]);
 
-		// Add the valueline path.
 		var binder = svg.selectAll(".line")
 			.data([this.props.data]);
 
@@ -195,12 +123,10 @@ class MoviePage extends Component {
 			.attr("class", "line")
 			.attr("d", valueline);
 
-		// Add the X Axis
 		svg.select(".x-axis")
 			.attr("transform", "translate(0," + height + ")")
 			.call(d3.axisBottom(x));
 
-		// Add the Y Axis
 		svg.select(".y-axis")
 			.call(d3.axisLeft(y));
 	}
@@ -273,8 +199,6 @@ export default withTracker((props) => {
 
 	var tweets = Tweets.find({ query: props.match.params.name }, { created_at: 1, _id: 0 }).fetch();
 	var data = calculateData(tweets);
-	console.log(props.match.params.name);
-	console.log(data);
 
 	return {
 		id: props.match.params.id,

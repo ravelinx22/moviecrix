@@ -10,7 +10,7 @@ class TweetList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
+			started: false
 		}
 	}
 
@@ -18,8 +18,10 @@ class TweetList extends Component {
 	}
 
 	componentDidUpdate() {
-		if (this.props.start) {
-			console.log("Started stream");
+		if (this.props.start && !this.state.started) {
+			this.setState({
+				started: true,
+			})
 			Meteor.call("twitter.stream", this.props.query);
 		}
 	}
