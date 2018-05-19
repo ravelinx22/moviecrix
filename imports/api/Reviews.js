@@ -7,7 +7,7 @@ Meteor.methods({
         Reviews.insert({
             movieId: movieId,
             comment: comment,
-            owner: Meteor.users.findOne({_id: Meteor.userId}).username
+            owner: Meteor.users.findOne({_id: Meteor.userId()}).username
         });
     }
 });
