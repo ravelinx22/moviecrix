@@ -3,6 +3,10 @@ body {
 	font-family: 'Average', serif !important;
 }
 
+circle {
+    cursor: pointer;
+}
+
 button, a, h1, h2, h3, h4, h5 {
 	font-family: 'Fjalla One', sans-serif !important;
 }
