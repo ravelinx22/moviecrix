@@ -42,6 +42,7 @@ export function barChart(type_graph){
 				.attr('height', height)
 				.attr('class', 'bars');
 
+			// ajustar las escalas
 			var bar = bars.selectAll('.movie')
 				.data(data)
 				.enter().append('g')
